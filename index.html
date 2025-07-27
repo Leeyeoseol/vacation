@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방학 하루 계획표</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #e2e8f0; /* Slightly darker blue-gray background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        /* 현재 활동을 강조하는 커스텀 클래스 */
+        .current-activity-highlight {
+            background-color: #e0f2f7 !important; /* 더 밝은 푸른색 배경 */
+            border: 2px solid #0ea5e9 !important; /* 선명한 스카이 블루 테두리 */
+            box-shadow: 0 15px 25px -5px rgba(14, 165, 233, 0.4), 0 6px 10px -3px rgba(14, 165, 233, 0.2) !important; /* 푸른색 그림자 */
+            transform: scale(1.03); /* 조금 더 확대 */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* 부드럽고 탄력 있는 전환 효과 */
+        }
+        /* 배경 이모지 스타일 */
+        .background-emoji {
+            position: absolute;
+            font-size: 3rem; /* 이모지 크기 */
+            opacity: 1; /* 투명도 제거 */
+            z-index: 0; /* 배경으로 보내기 */
+            pointer-events: none; /* 클릭 방지 */
+        }
+        /* 활동 항목 기본 배경 (살짝 불투명) */
+        .activity-item-base {
+            background-color: rgba(255, 255, 255, 0.7); /* 흰색에 70% 불투명도 */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="max-w-3xl w-full bg-white p-10 rounded-3xl shadow-2xl border border-gray-200 relative overflow-hidden">
+        <!-- 배경 다꾸 이모지들 - 분포도 높임 -->
+        <span class="background-emoji" style="top: 3%; left: 5%; transform: rotate(-10deg); font-size: 3.5rem;">🕊️</span>
+        <span class="background-emoji" style="top: 15%; right: 7%; transform: rotate(20deg); font-size: 3rem;">🪼</span>
+        <span class="background-emoji" style="top: 10%; left: 40%; transform: rotate(35deg); font-size: 2.8rem;">💙</span>
+        <span class="background-emoji" style="top: 28%; left: 2%; transform: rotate(-25deg); font-size: 3.2rem;">🐬</span>
+        <span class="background-emoji" style="top: 35%; right: 12%; transform: rotate(15deg); font-size: 3.8rem;">🧶</span>
+        <span class="background-emoji" style="top: 40%; left: 25%; transform: rotate(-5deg); font-size: 3rem;">🎐</span>
+        <span class="background-emoji" style="top: 55%; left: 8%; transform: rotate(10deg); font-size: 3.5rem;">🎧</span>
+        <span class="background-emoji" style="top: 60%; right: 5%; transform: rotate(-18deg); font-size: 3.2rem;">🩵</span>
+        <span class="background-emoji" style="top: 75%; left: 15%; transform: rotate(28deg); font-size: 3rem;">🪼</span>
+        <span class="background-emoji" style="top: 85%; right: 10%; transform: rotate(-12deg); font-size: 3.5rem;">💙</span>
+        <span class="background-emoji" style="top: 5%; right: 25%; transform: rotate(-40deg);">🐬</span>
+        <span class="background-emoji" style="bottom: 10%; left: 50%; transform: rotate(50deg);">🕊️</span>
+        <span class="background-emoji" style="top: 20%; left: 55%; transform: rotate(10deg);">🧶</span>
+        <span class="background-emoji" style="bottom: 20%; right: 30%; transform: rotate(-30deg);">🎧</span>
+        <span class="background-emoji" style="top: 40%; right: 40%; transform: rotate(20deg);">🎐</span>
+        <span class="background-emoji" style="bottom: 5%; left: 5%; transform: rotate(5deg); font-size: 3.8rem;">🩵</span>
+        <span class="background-emoji" style="top: 70%; left: 30%; transform: rotate(-15deg);">🪼</span>
+        <span class="background-emoji" style="top: 30%; right: 30%; transform: rotate(25deg);">💙</span>
+
+
+        <h1 class="text-5xl font-extrabold text-center text-gray-900 mb-10 tracking-tight leading-tight relative z-10">
+            나의 <span class="text-blue-600">방학</span> 하루 계획표
+        </h1>
+
+        <div class="space-y-5 relative z-10" id="schedule-container">
+            <!-- 각 활동 항목에 시작 및 종료 시간 데이터 속성 추가 -->
+            <!-- 모든 활동 항목의 기본 배경색을 흰색 불투명으로 통일 -->
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="0800" data-end="0830">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">08:00 - 08:30</div>
+                <div class="flex-grow text-gray-600 text-xl">기상 + 준비</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="0830" data-end="0900">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">08:30 - 09:00</div>
+                <div class="flex-grow text-gray-600 text-xl">아침 식사</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="0900" data-end="1000">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">09:00 - 10:00</div>
+                <div class="flex-grow text-gray-600 text-xl">수학 문제 풀기</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1000" data-end="1030">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">10:00 - 10:30</div>
+                <div class="flex-grow text-gray-600 text-xl">휴식 (간단히 게임, 멍 때리기)</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1030" data-end="1130">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">10:30 - 11:30</div>
+                <div class="flex-grow text-gray-600 text-xl">코딩 숙제</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1130" data-end="1200">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">11:30 - 12:00</div>
+                <div class="flex-grow text-gray-600 text-xl">휴식</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1200" data-end="1300">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">12:00 - 13:00</div>
+                <div class="flex-grow text-gray-600 text-xl">코테 문제풀기 ①</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1300" data-end="1430">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">13:00 - 14:30</div>
+                <div class="flex-grow text-gray-600 text-xl">점심 + 게임 or 유튜브</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1430" data-end="1530">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">14:30 - 15:30</div>
+                <div class="flex-grow text-gray-600 text-xl">HTML 공부</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1530" data-end="1600">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">15:30 - 16:00</div>
+                <div class="flex-grow text-gray-600 text-xl">휴식 (간식, 게임 등)</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1600" data-end="1700">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">16:00 - 17:00</div>
+                <div class="flex-grow text-gray-600 text-xl">코테 문제풀기 ②</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1700" data-end="1800">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">17:00 - 18:00</div>
+                <div class="flex-grow text-gray-600 text-xl">자유시간 (그림, 게임, 애니 등)</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1800" data-end="1830">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">18:00 - 18:30</div>
+                <div class="flex-grow text-gray-600 text-xl">저녁 식사</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1830" data-end="1930">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">18:30 - 19:30</div>
+                <div class="flex-grow text-gray-600 text-xl">블렌더 (격일 가능)</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="1930" data-end="2100">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">19:30 - 21:00</div>
+                <div class="flex-grow text-gray-600 text-xl">게임 or 완전 자유시간</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="2100" data-end="2200">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">21:00 - 22:00</div>
+                <div class="flex-grow text-gray-600 text-xl">샤워 + 마무리 루틴</div>
+            </div>
+            <div class="flex items-center activity-item-base p-5 rounded-2xl shadow-md transition-all duration-300 ease-in-out" data-start="2300" data-end="2400">
+                <div class="flex-shrink-0 w-28 text-xl font-bold text-gray-700">23:00</div>
+                <div class="flex-grow text-gray-600 text-xl">취침</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scheduleItems = document.querySelectorAll('#schedule-container > div');
+
+            // 현재 시간에 따라 활동을 강조하는 함수
+            function updateScheduleHighlight() {
+                const now = new Date();
+                const currentHour = now.getHours();
+                const currentMinute = now.getMinutes();
+                const currentTimeInMinutes = currentHour * 60 + currentMinute;
+
+                scheduleItems.forEach(item => {
+                    const startTimeStr = item.dataset.start;
+                    const endTimeStr = item.dataset.end;
+
+                    // 시간과 활동 내용 요소를 가져옵니다.
+                    const timeElement = item.querySelector('.text-xl.font-bold');
+                    const activityElement = item.querySelector('.flex-grow');
+
+                    // 시작 시간 파싱 (HHMM 형식)
+                    const startHour = parseInt(startTimeStr.substring(0, 2));
+                    const startMinute = parseInt(startTimeStr.substring(2, 4));
+                    const startTimeInMinutes = startHour * 60 + startMinute;
+
+                    // 종료 시간 파싱 (HHMM 형식)
+                    let endHour = parseInt(endTimeStr.substring(0, 2));
+                    let endMinute = parseInt(endTimeStr.substring(2, 4));
+                    let endTimeInMinutes = endHour * 60 + endMinute;
+
+                    // 종료 시간이 시작 시간보다 이른 경우 (자정을 넘는 경우) 다음 날로 간주
+                    if (endTimeInMinutes < startTimeInMinutes) {
+                        endTimeInMinutes += 24 * 60; // 24시간 추가
+                    }
+
+                    // 이전에 적용된 강조 클래스 제거 및 기본 스타일 복원
+                    item.classList.remove('current-activity-highlight');
+                    item.classList.add('activity-item-base', 'shadow-md'); // 기본 불투명 배경 및 그림자 복원
+
+                    // 모든 항목의 텍스트 색상을 기본 회색으로 설정
+                    if (timeElement) {
+                        timeElement.classList.remove('text-blue-700'); // 이전 강조 색상 제거
+                        timeElement.classList.add('text-gray-700');
+                    }
+                    if (activityElement) {
+                        activityElement.classList.remove('text-blue-800'); // 이전 강조 색상 제거
+                        activityElement.classList.add('text-gray-600');
+                    }
+
+                    // 현재 시간이 활동 범위 내에 있는지 확인
+                    // '취침' 활동은 23:00부터 자정까지 활성화된 것으로 간주
+                    if (item.dataset.start === "2300") {
+                        if (currentTimeInMinutes >= startTimeInMinutes || currentTimeInMinutes < 8 * 60) { // 자정 이후부터 다음날 8시 이전까지 취침으로 간주
+                            item.classList.add('current-activity-highlight');
+                            item.classList.remove('activity-item-base', 'shadow-md'); // 기본 배경 및 그림자 제거 (강조 클래스가 담당)
+                            // 강조된 항목의 텍스트 색상을 푸른색으로 변경
+                            if (timeElement) {
+                                timeElement.classList.remove('text-gray-700');
+                                timeElement.classList.add('text-blue-700');
+                            }
+                            if (activityElement) {
+                                activityElement.classList.remove('text-gray-600');
+                                activityElement.classList.add('text-blue-800');
+                            }
+                        }
+                    } else if (currentTimeInMinutes >= startTimeInMinutes && currentTimeInMinutes < endTimeInMinutes) {
+                        item.classList.add('current-activity-highlight');
+                        item.classList.remove('activity-item-base', 'shadow-md'); // 기본 배경 및 그림자 제거 (강조 클래스가 담당)
+                        // 강조된 항목의 텍스트 색상을 푸른색으로 변경
+                        if (timeElement) {
+                                timeElement.classList.remove('text-gray-700');
+                                timeElement.classList.add('text-blue-700');
+                            }
+                            if (activityElement) {
+                                activityElement.classList.remove('text-gray-600');
+                                activityElement.classList.add('text-blue-800');
+                            }
+                    }
+                });
+            }
+
+            // 페이지 로드 시 즉시 강조 업데이트
+            updateScheduleHighlight();
+
+            // 1분마다 강조 업데이트 (실시간 반영)
+            setInterval(updateScheduleHighlight, 60 * 1000); // 60초마다 실행
+        });
+    </script>
+</body>
+</html>
